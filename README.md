@@ -4,5 +4,5 @@
 
 ### Setting Up Vite
 ````bash
-
+npm i -D vite
 ````
