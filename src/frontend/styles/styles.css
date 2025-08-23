@@ -1,0 +1,65 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+    /* Colors */
+    --color-bg: #f1f2f2;
+    --color-header: #0B1E2D;
+    --color-text: #FFFFFF;
+    --color-accent: #D4AF37;
+    --color-border: #1C2A36;
+
+    /* Typography */
+    --font-sans: 'Inter', sans-serif;
+    --text-xs: 12px;
+    --text-sm: 14px;
+    --text-base: 16px;
+    --text-lg: 20px;
+    --text-xl: 24px;
+    --text-2xl: 32px;
+
+    /* Spacing */
+    --space-1: 4px;
+    --space-3: 12px;
+    --space-4: 16px;
+    --space-6: 24px;
+    --space-8: 32px;
+    --space-12: 48px;
+    --space-2: 8px;
+
+    /* Border Radius and Shadows*/
+    --shadow: 0 6px 24px rgba(0,0,0,0.18);
+    --radius: 12px;
+}
+
+body {
+    background-color: var(--color-bg);                                                                      
+    color: var(--color-text);
+    font-family: var(--font-sans);
+    font-size: var(--text-base);
+    line-height: 1.5;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.buttons-used {
+    background: var(--color-accent);
+    padding: var(--space-2) var(--space-4);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    font-weight: bold;
+    color: var(--color-bg);
+}
+
+.card {
+    background: #fff;
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    padding: var(--space-4);
+}
+
+footer {
+    margin-top: auto;
+}

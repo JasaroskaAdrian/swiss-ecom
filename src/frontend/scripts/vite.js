@@ -1,4 +1,6 @@
 const modules = import.meta.glob('../scripts/*.js', { eager: true })
+import '../styles/styles.css';  // <-- IMPORTANT
+
 
 for (const path in modules) {
   console.log(`Loaded: ${path}`);

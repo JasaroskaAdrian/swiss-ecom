@@ -1,0 +1,21 @@
+import express from 'express'
+import path from 'path'
+import { fileURLToPath } from 'url'
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename)
+
+const DIST = path.resolve(process.cwd(), "dist")
+
+const app = express()
+const port = process.env.PORT || 3000;
+
+app.use(express.static(DIST));
+
+app.get('/', (req, res) => res.redirect('/home'))
+
+app.get('/home', (req, res) => {
+    res.sendFile(path.join(DIST, "index.html"))
+})
+
+app.listen(port, () => console.log(`http://localhost:${port}`))
