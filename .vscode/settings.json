@@ -1,0 +1,6 @@
+{
+  "material-icon-theme.folders.associations": {
+    "migrations": "tools",   // or "db", "tools", etc. — pick what you like
+    "archive": "archive"        // optional: give archive its own icon too
+  },
+}
