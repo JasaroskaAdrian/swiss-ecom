@@ -1,0 +1,110 @@
+name: Issue
+description: One template for features, bugs, migrations, chores, docs.
+title: "[area] short summary"
+labels: []   # optional: put "triage" here if you want a default
+assignees: []
+body:
+  - type: dropdown
+    id: type
+    attributes:
+      label: Type
+      options:
+        - feature
+        - bug
+        - migration
+        - chore
+        - docs
+      description: Pick what this issue is.
+    validations:
+      required: true
+
+  - type: input
+    id: area
+    attributes:
+      label: Scope / Area
+      placeholder: "frontend, backend, db, infra, docs"
+    validations:
+      required: true
+
+  - type: textarea
+    id: summary
+    attributes:
+      label: Summary
+      placeholder: "What and why in 1–3 lines."
+    validations:
+      required: true
+
+  - type: textarea
+    id: context
+    attributes:
+      label: Context / Problem
+      placeholder: "Current behavior, pain points, screenshots/logs."
+    validations:
+      required: false
+
+  - type: textarea
+    id: solution
+    attributes:
+      label: Proposed solution
+      placeholder: "Approach, alternatives, non-goals."
+    validations:
+      required: false
+
+  - type: textarea
+    id: acceptance
+    attributes:
+      label: Acceptance criteria
+      placeholder: "- [ ] User can …\n- [ ] API returns …\n- [ ] Errors handled …"
+    validations:
+      required: true
+
+  - type: textarea
+    id: changes
+    attributes:
+      label: UI / API / DB changes
+      placeholder: |
+        **UI**: views/components, states
+        **API**: endpoints, request/response
+        **DB/Migration**: tables/columns/indexes (list files in `db/migrations/`)
+    validations:
+      required: false
+
+  - type: textarea
+    id: risk
+    attributes:
+      label: Risks / Rollback plan
+      placeholder: "Known risks, flags, how to revert/migrate back."
+    validations:
+      required: false
+
+  - type: textarea
+    id: testing
+    attributes:
+      label: Test plan
+      placeholder: "Unit/E2E steps to verify. Include edge cases."
+    validations:
+      required: false
+
+  - type: input
+    id: links
+    attributes:
+      label: Related issues/PRs
+      placeholder: "#123, #456"
+    validations:
+      required: false
+
+  - type: dropdown
+    id: priority
+    attributes:
+      label: Priority
+      options: [P1, P2, P3]
+    validations:
+      required: false
+
+  - type: dropdown
+    id: size
+    attributes:
+      label: Size (estimate)
+      options: [S, M, L]
+    validations:
+      required: false
