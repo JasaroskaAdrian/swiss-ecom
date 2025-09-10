@@ -19,12 +19,12 @@ CREATE EXTENSION IF NOT EXISTS citext;
 
 CREATE TABLE IF NOT EXISTS users (
     user_id       BIGSERIAL PRIMARY KEY
-   ,username      CITEXT      NOT NULL        
+   ,username      CITEXT      NOT NULL
    ,email         CITEXT      NOT NULL
    ,password_hash TEXT        NOT NULL
    ,first_name    TEXT        NOT NULL
    ,last_name     TEXT        NOT NULL
-   ,role          TEXT        NOT NULL DEFAULT 'user' CHECK (role IN ('user', 'mod', 'admin'))   
+   ,role          TEXT        NOT NULL DEFAULT 'user' CHECK (role IN ('user', 'mod', 'admin'))
    ,is_active     BOOLEAN     NOT NULL DEFAULT TRUE 
    ,created_at    TIMESTAMPTZ NOT NULL DEFAULT now()
    ,updated_at    TIMESTAMPTZ NOT NULL DEFAULT now()  
@@ -32,7 +32,7 @@ CREATE TABLE IF NOT EXISTS users (
 -- Uniqueness Contraint in Email and Username
 ALTER TABLE users
     ADD CONSTRAINT users_username_uniq_k UNIQUE (username)
-   ,ADD CONSTRAINT users_email_uniq_k    UNIQUE (email)    
+   ,ADD CONSTRAINT users_email_uniq_k    UNIQUE (email)
 
 CREATE OR REPLACE FUNCTION set_updated_at()
 RETURNS TRIGGER AS $$
