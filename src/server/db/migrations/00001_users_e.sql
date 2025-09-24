@@ -6,8 +6,8 @@
 -- *************************************************************************************************************
 -- * Date        Author(s)   Comment                                                                           *
 -- * ----------  ----------  --------------------------------------------------------------------------------- *
--- * 08.09.2025  AJAS        Created - Added Fields user_id, first_name, last_name, email and password         *
--- * 09.09.2025  AJAS        Changed - Added Fields (rolem is_active, created_at, updated_at)                  *
+-- * 08.09.2025  AJAS        Created                                                                           *
+-- * 09.09.2025  AJAS        Changed - Added Fields (role, is_active, created_at, updated_at)                  *
 -- *                         | from NUMBER and VARCHAR2 to BIGSERIAL and CITXT and TXT (Oracle Syntax to PGSQL)*
 -- *                         | Added NOT NULL Constr and PRIMARY KEY to user_id                                *
 -- *                         | Added Unique Constraints to username and email                                  *
@@ -17,20 +17,20 @@
 -- Case-insensitivity text for username and email 
 CREATE EXTENSION IF NOT EXISTS citext;
 
-CREATE TABLE IF NOT EXISTS users (
-    user_id       BIGSERIAL PRIMARY KEY
+CREATE TABLE IF NOT EXISTS users_e (
+    user_id       BIGINT      PRIMARY KEY
    ,username      CITEXT      NOT NULL
    ,email         CITEXT      NOT NULL
    ,password_hash TEXT        NOT NULL
    ,first_name    TEXT        NOT NULL
    ,last_name     TEXT        NOT NULL
-   ,role          TEXT        NOT NULL DEFAULT 'user' CHECK (role IN ('user', 'mod', 'admin'))
+   ,role          BIGINT      NOT NULL DEFAULT 'user' CHECK (role IN ('customer', 'user', 'mod', 'admin'))
    ,is_active     BOOLEAN     NOT NULL DEFAULT TRUE 
    ,created_at    TIMESTAMPTZ NOT NULL DEFAULT now()
    ,updated_at    TIMESTAMPTZ NOT NULL DEFAULT now()  
 );
 -- Uniqueness Contraint in Email and Username
-ALTER TABLE users
+ALTER TABLE users_e
     ADD CONSTRAINT users_username_uniq_k UNIQUE (username)
    ,ADD CONSTRAINT users_email_uniq_k    UNIQUE (email)
 
@@ -41,7 +41,7 @@ BEGIN
     RETURN NEW;
 END; $$ LANGUAGE plpgsql;
 
-DROP TRIGGER IF EXISTS users_set_updated_at ON users;
+DROP TRIGGER IF EXISTS users_set_updated_at ON users_e;
 CREATE TRIGGER users_set_updated_at
-BEFORE UPDATE ON users
+BEFORE UPDATE ON users_e
 FOR EACH ROW EXECUTE FUNCTION set_updated_at();
