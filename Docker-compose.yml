@@ -17,6 +17,17 @@ services:
       - "8080:8080"
     depends_on:
       - db
-
+  wiki:
+    image: requarks/wiki:canary-2.5.0-dev.409
+    restart: unless-stopped
+    ports:
+      - "8040:8040"
+    environment:
+      DB_TYPE: postgres
+      DB_HOST: admin
+      DB_PORT: 5432
+      DB_USER: admin
+      DB_PASS_FILE: ./.env
+      DB_NAME: shop
 volumes:
   dbDataSave:
