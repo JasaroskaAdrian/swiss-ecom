@@ -18,4 +18,11 @@ app.get('/home', (req, res) => {
     res.sendFile(path.join(DIST, "index.html"))
 })
 
+app.get('/login', (req, res) => {
+    res.sendFile(path.join(DIST), "login.html")
+})
+
+app.get('/register', (req, res) => {
+    res.sendFile(path.join(DIST), "register.html")
+})
 app.listen(port, () => console.log(`http://localhost:${port}`))
