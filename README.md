@@ -52,6 +52,7 @@ git push origin v<version>
 > - `feature` branches = squash merge  
 > - `release` / `hotfix` branches = merge commit  
 > - Always tag **main** after release or hotfix
+
 ## Developement Scripts
 ````bash
 npm init

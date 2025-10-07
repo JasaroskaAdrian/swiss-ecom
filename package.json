@@ -10,7 +10,9 @@
     "esbuild": "^0.25.9",
     "express": "^5.1.0",
     "fdir": "^6.5.0",
+    "fs": "^0.0.1-security",
     "nanoid": "^3.3.11",
+    "node-sql-parser": "^5.3.12",
     "path": "^0.12.7",
     "pg": "^8.16.3",
     "picocolors": "^1.1.1",
@@ -32,7 +34,8 @@
     "build": "vite build",
     "preview": "vite preview",
     "serve": "node src/server/server.js",
-    "db": "node src/server/db/database.js"
+    "db": "node src/server/db/database.js",
+    "runsql": "node src/server/api/bin/run_sql.js"
   },
   "repository": {
     "type": "git",

@@ -10,6 +10,11 @@ services:
       - "15432:5432"
     volumes:
       - dbDataSave:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U admin -d shop || exit 1"]
+      interval: 5s
+      timeout: 3s
+      retries: 20  
   adminer:
     image: adminer:latest
     restart: unless-stopped
@@ -22,13 +27,16 @@ services:
     restart: unless-stopped
     ports:
       - "8040:8040"
-    environment:
+    environment: 
       - DB_TYPE=postgres
-      - DB_HOST=admin
+      - DB_HOST=db          # host = service name, NOT "admin"
       - DB_PORT=5432
-      - DB_USER=admin
-      - DB_PASS_FILE=./.env
-      - DB_NAME=shop
+      - DB_USER=admin       # same as db: POSTGRES_USER
+      - DB_PASS=${POSTGRES_PASS}   # <- use a value, not DB_PASS_FILE
+      - DB_NAME=shop  
+    depends_on:
+      db:
+        condition: service_healthy      # same as db: POSTGRES_DB
   prometheus:
     image: prom/prometheus
     volumes:

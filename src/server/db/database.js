@@ -5,7 +5,7 @@ const { Pool, Client } = pg
 async function main(){
     const pool = new Pool({
         host: '127.0.0.1',
-        port: '15432:5432',
+        port: '15432',
         user: 'admin',
         password: process.env.POSTGRES_PASS,
         database: 'shop',
