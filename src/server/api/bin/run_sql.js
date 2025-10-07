@@ -12,7 +12,7 @@ async function runSql(){
         user: 'admin',
         password: process.env.POSTGRES_PASS,
         database: 'shop'
-    })
+    })  
     try {
     /*
     Check Up on Parameters
@@ -54,6 +54,5 @@ async function runSql(){
     } catch (err) {
         console.error("DB Error:", err.code, err.message);    
     }
-    
 }
 runSql()

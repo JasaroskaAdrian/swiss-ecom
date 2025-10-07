@@ -59,7 +59,11 @@ npm init
 ````
 
 ````bash
-npm i
+npm install
+````
+
+````bash
+node ./src/server/api/bin/run_sql.js ./src/server/db/migrations/--SqlFileName
 ````
 
 ### Setting Up Vite in a new Project
