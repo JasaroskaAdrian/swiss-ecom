@@ -14,12 +14,16 @@ services:
       test: ["CMD-SHELL", "pg_isready -U admin -d shop || exit 1"]
       interval: 5s
       timeout: 3s
-      retries: 20  
+      retries: 20
+    networks:
+      - backend
   adminer:
     image: adminer:latest
     restart: unless-stopped
     ports:
       - "8080:8080"
+    networks:
+      - backend
     depends_on:
       - db
   wiki:
@@ -53,5 +57,34 @@ services:
     environment:
       - GF_SECURITY_ADMIN_USER=admin
       - GF_SECURITY_ADMIN_PASSWORD=supersecret123
+  rabbitmq:
+    image: rabbitmq:3-management
+    container_name: my_rabbitmq
+    ports:
+      - "5672:5672"                        # RabbitMQ server
+      - "15672:15672"                      # RabbitMQ management console
+    volumes:
+      - ./rabbitmq/data:/var/lib/rabbitmq  # RabbitMQ data directory
+    environment:
+      - RABBITMQ_DEFAULT_USER=pibble       # Change this to your desired username
+      - RABBITMQ_DEFAULT_PASS=${RMQ_PASS} # Change this to your desired password
+  traefik:
+    image: traefik:v3.5
+    container_name: traefik_reverseProxy
+    ports:
+      - "81:80"
+      - "444:443"
+      - "8083:8080"
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - ./config/traefik.yaml:/etc/traefik/traefik.yaml:ro
+    networks:
+      - frontend
+    restart: unless-stopped
+networks:
+  frontend:
+    external: true
+  backend:
+    external: true
 volumes:
   dbDataSave:

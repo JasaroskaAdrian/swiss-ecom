@@ -1,3 +1,5 @@
 node_modules
 .env
 dist
+/rabbitmq/data/.erlang.cookie
+/rabbitmq/data/mnesia
