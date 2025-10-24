@@ -11,8 +11,11 @@ const app = express()
 const port = process.env.PORT || 3000;
 
 app.use(express.static(DIST));
+app.use((req, res) => res.status(404).send('Not found'));
 
 app.get('/', (req, res) => res.redirect('/home'))
+
+app.get('/health', (_, res) => res.json({ ok: true }));
 
 app.get('/home', (req, res) => {
     res.sendFile(path.join(DIST, "index.html"))

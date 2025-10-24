@@ -7,7 +7,7 @@ async function runSql(){
     /*
     Check Up if File exists or is getting read
     */
-        const file = process.argv[2];
+        const file = process.argv[2]; [0][1][2]
         if(!file) {
             console.error('Usage: node bin/run-sql.js <path/to/file.sql> ');
             process.exit(1)

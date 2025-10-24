@@ -1,0 +1,11 @@
+.gitignore
+.gitattributes
+LICENSE
+README.md
+Docker-compose.yml
+Dockerfile
+dist
+node_modules
+archive
+.vscode
+.github
