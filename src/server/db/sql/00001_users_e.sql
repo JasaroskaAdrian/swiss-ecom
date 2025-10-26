@@ -29,7 +29,7 @@ CREATE TABLE IF NOT EXISTS users_e (
    ,role          BIGINT      NOT NULL 
    ,is_active     BOOLEAN     NOT NULL DEFAULT TRUE 
    ,created_at    TIMESTAMPTZ NOT NULL DEFAULT now()
-   ,updated_at    TIMESTAMPTZ DEFAULT now()  
+   ,updated_at    TIMESTAMPTZ DEFAULT now()
 );
 -- Uniqueness Contraint in Email and Username
 ALTER TABLE users_e

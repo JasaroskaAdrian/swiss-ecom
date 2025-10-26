@@ -2,7 +2,7 @@ import { defineConfig } from 'vite';
 import { resolve } from 'path'
 
 export default defineConfig({
-    root: 'src/frontend/views',
+    root: 'src/frontend/html',
     server: { open: true },
     build: {
         outDir: '../../../dist',
