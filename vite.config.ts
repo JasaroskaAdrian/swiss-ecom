@@ -13,7 +13,11 @@ export default defineConfig({
   ],
   server: {
     port: 3000,
+    proxy: {
+        '/api': 'http'
+    }
   },
+  root: 'src/frontend',
   build: {
         outDir: '../../../dist',
         emptyOutDir: true
