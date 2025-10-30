@@ -30,7 +30,7 @@ const Navbar = () => {
             </a>
             <a href="/cart" className="relative rounded-xl bg-accent px-4 py-2 text-sm font-semibold text-black hover:opacity-95">
               Warenkorb
-              <span className="absolute -right-2 -top-2 inline-flex h-5 min-w-[1.25rem] items-center justify-center rounded-full bg-white px-1 text-xs font-bold text-black">
+              <span className="absolute -right-2 -top-2 inline-flex h-5 min-w-1.25rem items-center justify-center rounded-full bg-white px-1 text-xs font-bold text-black">
                 3
               </span>
             </a>
