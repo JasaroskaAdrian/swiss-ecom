@@ -4,7 +4,7 @@ type ProductCardProps = {
     pPrice: number;
 }
 
-const ProductCard: React.FC<ProductCardProps> = ({ pName, pStock, pPrice }) => {
+const ProductCard: React.FC<ProductCardProps> = ({ pName = 'Item x', pStock = 9999, pPrice = 9999 }) => {
     const priceCHF = (pPrice / 100).toLocaleString('de-CH', {
         style: 'currency',
         currency: 'CHF',
