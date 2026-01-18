@@ -1,14 +1,13 @@
 const Navbar = () => {
   return (
-    <header className="py-4 bg-[#17405f]/85 text-white">
+    <header className="py-4 bg-[#1B1B1B]/85 text-white">
       <div className="mx-auto max-w-[1200px] px-4 sm:px-6 lg:px-8 py-">
         <div className="flex items-center gap-4">
           <a
             href="/"
             className="flex items-center gap-2 font-semibold tracking-wide"
           >
-            <img src="/eS-Logo.svg" alt="eS" className="h-10 w-10" />
-            <span className="text-xl">eSwiss</span>
+            <span className="text-xl">Gligar</span>
           </a>
 
           <form

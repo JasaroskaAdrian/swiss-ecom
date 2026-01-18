@@ -1,4 +1,4 @@
-# swiss-ecom
+# Gligar
 
 ## Branching Strategy (GitFlow)
 
