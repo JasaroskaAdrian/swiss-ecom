@@ -9,8 +9,6 @@ const HomePage = () => {
     <div className="min-h-screen bg-bg text-text flex flex-col">
     <div className="mx-auto max-w-content px-4 sm:px-6 lg:px-8 flex-1">
 
-    <Navbar />
-
     {/** Hero*/}
     <Hero />
 

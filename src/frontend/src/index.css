@@ -1,9 +1,11 @@
 @import "tailwindcss";
+@import url('https://fonts.googleapis.com/css2?family=Gravitas+One&display=swap');
 
 @theme {
   --font-sans: Roboto, ui-sans-serif, system-ui, sans-serif;
-  --color-bg: #0B1E2d;
-  --color-text: #ffffff;
-  --color-accent: #D4AF37;
+  --color-bg: #f9f9f9;
+  --color-text: #00000;
+  --color-accent: #cab7ff;
+  --color-secondary: #00000;
   --shadow-soft: 0 6px 24px rgba(0,0,0,.18);
 }

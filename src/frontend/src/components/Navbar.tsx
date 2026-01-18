@@ -1,14 +1,16 @@
+import { Link } from "react-router-dom";
+
 const Navbar = () => {
   return (
     <header className="py-4 bg-[#1B1B1B]/85 text-white">
       <div className="mx-auto max-w-[1200px] px-4 sm:px-6 lg:px-8 py-">
         <div className="flex items-center gap-4">
-          <a
-            href="/"
+          <Link
             className="flex items-center gap-2 font-semibold tracking-wide"
+            to="/"
           >
-            <span className="text-xl">Gligar</span>
-          </a>
+            <span className="text-xl gravitas-one-regular">Gligar</span>
+          </Link>
 
           <form
             className="ml-auto hidden w-full max-w-xl items-center gap-2 rounded-xl border border-white/10 bg-white/5 px-3 py-2 shadow-soft backdrop-blur sm:flex"
@@ -36,12 +38,12 @@ const Navbar = () => {
           </form>
 
           <nav className="ml-2 flex items-center gap-2">
-            <a
-              href="/login"
+            <Link
               className="rounded-xl bg-white/10 px-4 py-2 text-sm hover:bg-white/15"
+              to="/login"
             >
               Login
-            </a>
+            </Link>
             <a
               href="/cart"
               className="relative rounded-xl bg-accent px-4 py-2 text-sm font-semibold text-black hover:opacity-95"

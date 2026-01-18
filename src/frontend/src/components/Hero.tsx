@@ -7,7 +7,7 @@ const Hero = () => {
             <h1 className="text-3xl font-semibold leading-tight">
               Qualität, auf Schweizer Niveau.
             </h1>
-            <p className="mt-2 text-white/70">
+            <p className="mt-2 color-accent">
               Faire Preise. Verlässliche Lieferung. Kein Schnickschnack.
             </p>
           </div>
