@@ -16,34 +16,19 @@
 -- *                         | removed DEFAULT 4 but need to add as soon as roles Table is created and seeded  *
 -- *************************************************************************************************************
 
--- Case-insensitivity text for username and email 
-CREATE EXTENSION IF NOT EXISTS citext;
+DROP TABLE IF EXISTS users_e;
 
 CREATE TABLE IF NOT EXISTS users_e (
-    user_id       BIGSERIAL   PRIMARY KEY
-   ,username      CITEXT      NOT NULL
-   ,email         CITEXT      NOT NULL
-   ,password_hash TEXT        NOT NULL
-   ,first_name    TEXT        NOT NULL
-   ,last_name     TEXT        NOT NULL
-   ,role          BIGINT      NOT NULL 
-   ,is_active     BOOLEAN     NOT NULL DEFAULT TRUE 
-   ,created_at    TIMESTAMPTZ NOT NULL DEFAULT now()
-   ,updated_at    TIMESTAMPTZ DEFAULT now()
+    user_id         INT          NOT NULL AUTO_INCREMENT        
+   ,username        VARCHAR(255) NOT NULL UNIQUE
+   ,email           VARCHAR(320) NOT NULL UNIQUE
+   ,password        VARCHAR(128) NOT NULL
+   ,first_name      VARCHAR(70)  NOT NULL
+   ,last_name       VARCHAR(70)  NOT NULL
+   ,role            INT          NOT NULL 
+   ,is_active       BOOLEAN      NOT NULL DEFAULT TRUE 
+   ,created_at      TIMESTAMP    NOT NULL DEFAULT CURRENT_TIMESTAMP
+   ,created_by      INT          NOT NULL
+   ,updated_at      TIMESTAMP
+   ,updated_by      INT
 );
--- Uniqueness Contraint in Email and Username
-ALTER TABLE users_e
-    ADD CONSTRAINT users_username_uniq_k UNIQUE (username)
-   ,ADD CONSTRAINT users_email_uniq_k    UNIQUE (email);
-
-CREATE OR REPLACE FUNCTION set_updated_at()
-RETURNS TRIGGER AS $$
-BEGIN
-    NEW.updated_at := now();
-    RETURN NEW;
-END; $$ LANGUAGE plpgsql;
-
-DROP TRIGGER IF EXISTS users_set_updated_at ON users_e;
-CREATE TRIGGER users_set_updated_at
-BEFORE UPDATE ON users_e
-FOR EACH ROW EXECUTE FUNCTION set_updated_at();

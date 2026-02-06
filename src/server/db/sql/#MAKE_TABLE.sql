@@ -1,21 +1,17 @@
 -- *************************************************************************************************************
--- * 00003_categories_e.sql                                                                        (c) Gligar **
+-- * #MAKE_TABLE.sql                                                                               (c) Gligar **
 -- *                                                                                                          **
--- * Creation of the Categories Table for the products of the application                                               **
+-- * [Short Description of the Use of the Script]                                                             **
 -- *                                                                                                          **
 -- *************************************************************************************************************
 -- * Date        Author(s)   Comment                                                                           *
 -- * ----------  ----------  --------------------------------------------------------------------------------- *
--- * 27.01.2026  AJAS        Created                                                                           *
+-- * 24.09.2025  AJAS        Created                                                                           *
+-- * 27.01.2026  AJAS        00002_customers_e.sql                                                             *
 -- *************************************************************************************************************
-DROP TABLE IF EXISTS categories_e;
 
-CREATE TABLE IF NOT EXISTS categories_e (
-    category_id     INT          NOT NULL AUTO_INCREMENT
-   ,category_cd     INT          NOT NULL UNIQUE
-   ,cd_grp          VARCHAR(8)   NOT NULL
-   ,created_at      TIMESTAMP    NOT NULL DEFAULT CURRENT_TIMESTAMP
-   ,created_by      INT          NOT NULL
-   ,updated_at      TIMESTAMP
-   ,updated_by      INT
-);
+@@00001_users_e.sql
+@@00002_customers_e.sql
+@@00003_categories_e.sql
+@@00004_products_e.sql
+@@00005_roles_e.sql

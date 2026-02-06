@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 
 const Navbar = () => {
   return (
-    <header className="py-4 bg-[#1B1B1B]/85 text-white">
+    <header className="py-4 bg-[#1B1B1B]/85 text-white sticky">
       <div className="mx-auto max-w-[1200px] px-4 sm:px-6 lg:px-8 py-">
         <div className="flex items-center gap-4">
           <Link
@@ -13,7 +13,7 @@ const Navbar = () => {
           </Link>
 
           <form
-            className="ml-auto hidden w-full max-w-xl items-center gap-2 rounded-xl border border-white/10 bg-white/5 px-3 py-2 shadow-soft backdrop-blur sm:flex"
+            className="ml-auto hidden w-full max-w-96 items-center gap-2 rounded-xl border border-white/10 bg-white/5 px-3 py-2 shadow-soft backdrop-blur sm:flex"
             role="search"
           >
             <svg
