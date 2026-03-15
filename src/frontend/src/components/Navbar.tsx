@@ -1,24 +1,22 @@
 import { Link } from "react-router-dom";
+import ThemeToggle from "./ThemeToggle";
 
 const Navbar = () => {
   return (
-    <header className="py-4 bg-[#1B1B1B]/85 text-white sticky">
-      <div className="mx-auto max-w-[1200px] px-4 sm:px-6 lg:px-8 py-">
+    <header className="sticky top-0 z-50 border-b border-border bg-background/90 py-4 text-foreground backdrop-blur-md">
+      <div className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
         <div className="flex items-center gap-4">
-          <Link
-            className="flex items-center gap-2 font-semibold tracking-wide"
-            to="/"
-          >
+          <Link className="flex items-center gap-2 font-semibold tracking-wide" to="/">
             <span className="text-xl gravitas-one-regular">Gligar</span>
           </Link>
 
           <form
-            className="ml-auto hidden w-full max-w-96 items-center gap-2 rounded-xl border border-white/10 bg-white/5 px-3 py-2 shadow-soft backdrop-blur sm:flex"
+            className="ml-auto hidden w-full max-w-80 items-center gap-2 rounded-lg border border-border bg-muted/50 px-3 py-2 sm:flex"
             role="search"
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
-              className="h-5 w-5 shrink-0 text-white/60"
+              className="h-5 w-5 shrink-0 text-muted-foreground"
               viewBox="0 0 20 20"
               fill="currentColor"
               aria-hidden="true"
@@ -33,23 +31,24 @@ const Navbar = () => {
               aria-label="Suche"
               type="search"
               placeholder="Produkte suchen"
-              className="w-full bg-transparent placeholder-white/50 outline-none"
+              className="w-full bg-transparent text-foreground placeholder-muted-foreground outline-none"
             />
           </form>
 
           <nav className="ml-2 flex items-center gap-2">
+            <ThemeToggle />
             <Link
-              className="rounded-xl bg-white/10 px-4 py-2 text-sm hover:bg-white/15"
+              className="rounded-lg border border-border px-4 py-2 text-sm hover:bg-muted"
               to="/login"
             >
               Login
             </Link>
             <a
               href="/cart"
-              className="relative rounded-xl bg-accent px-4 py-2 text-sm font-semibold text-black hover:opacity-95"
+              className="relative rounded-lg bg-foreground px-4 py-2 text-sm font-semibold text-background hover:opacity-90"
             >
               Warenkorb
-              <span className="absolute -right-2 -top-2 inline-flex h-5 min-w-5 items-center justify-center rounded-full bg-white px-1 text-xs font-bold text-black">
+              <span className="absolute -right-2 -top-2 inline-flex h-5 min-w-5 items-center justify-center rounded-full bg-foreground px-1 text-xs font-bold text-background ring-2 ring-background">
                 3
               </span>
             </a>
@@ -57,12 +56,12 @@ const Navbar = () => {
         </div>
 
         <form
-          className="mt-3 flex w-full items-center gap-2 rounded-xl border border-white/10 bg-white/5 px-3 py-2 shadow-soft backdrop-blur sm:hidden"
+          className="mt-3 flex w-full items-center gap-2 rounded-lg border border-border bg-muted/50 px-3 py-2 sm:hidden"
           role="search"
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
-            className="h-5 w-5 shrink-0 text-white/60"
+            className="h-5 w-5 shrink-0 text-muted-foreground"
             viewBox="0 0 20 20"
             fill="currentColor"
             aria-hidden="true"
@@ -77,7 +76,7 @@ const Navbar = () => {
             aria-label="Suche"
             type="search"
             placeholder="Produkte suchen"
-            className="w-full bg-transparent placeholder-white/50 outline-none"
+            className="w-full bg-transparent text-foreground placeholder-muted-foreground outline-none"
           />
         </form>
       </div>

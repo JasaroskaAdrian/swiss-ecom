@@ -1,19 +1,19 @@
 const Hero = () => {
   return (
     <>
-      <section className="mt-6 overflow-hidden rounded-2xl bg-linear-to-r from-white/5 to-white/0 p-8 ring-1 ring-white/10">
-        <div className="flex flex-col items-start gap-4 sm:flex-row sm:items-center sm:justify-between">
+      <section className="mt-8 overflow-hidden rounded-2xl border border-border bg-card px-8 py-12 sm:py-16">
+        <div className="flex flex-col items-start gap-6 sm:flex-row sm:items-center sm:justify-between">
           <div>
-            <h1 className="text-3xl font-semibold leading-tight">
+            <h1 className="text-3xl font-bold leading-tight tracking-tight text-card-foreground sm:text-4xl">
               Qualität, auf Schweizer Niveau.
             </h1>
-            <p className="mt-2 color-accent">
+            <p className="mt-3 text-muted-foreground">
               Faire Preise. Verlässliche Lieferung. Kein Schnickschnack.
             </p>
           </div>
           <a
             href="#products"
-            className="rounded-xl bg-accent px-5 py-3 font-semibold text-black shadow-soft hover:opacity-95"
+            className="shrink-0 rounded-lg bg-foreground px-6 py-3 font-semibold text-background hover:opacity-90"
           >
             Jetzt shoppen
           </a>

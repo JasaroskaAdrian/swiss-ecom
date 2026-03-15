@@ -63,7 +63,7 @@ npm install
 ````
 
 ````bash
-npm run runsql ./src/server/db/migrations/--SqlFileName
+npm run runsql ./src/server/db/sql/--SqlFileName
 ````
 
 ### Setting Up Vite in a new Project
