@@ -1,5 +1,5 @@
 import 'dotenv/config'
-import client from "../../db/database"
+import { pool } from "../db/database.js"
 import fs from 'node:fs/promises'
 
 async function runSql(){
@@ -15,18 +15,17 @@ async function runSql(){
             console.log("SQL Path Parsing Successful")
         }
         const sql = await fs.readFile(file, 'utf8');
+        let conn;
         try {
-        /*
-        Connection to Database and Testing client.query() 
-        */
-            await client.connect();
+            const dbPool = pool();
+            conn = await dbPool.getConnection();
             console.log("Yay, connected to the Database! :)")
-            await client.query(sql)
+            await conn.query(sql)
             console.log('Result: OK');        
         } catch (err) {
             console.error('SQL error:', err.code || '', err.message)
         } finally {
-            await client.end();
+            if (conn) conn.end();
         }
     } catch (err) {
         console.error("DB Error:", err.code, err.message);    

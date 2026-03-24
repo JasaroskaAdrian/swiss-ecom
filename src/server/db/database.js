@@ -10,15 +10,24 @@ const dateForms     = {
 };
 const formattedDate = date.toLocaleDateString("de-CH", dateForms);
 
+let pool;
+
+function getPool() {
+    if (!pool) {
+        pool = mariadb.createPool({
+            host: '127.0.0.1',
+            port: 3306,
+            user: 'root',
+            password: process.env.MARIADB_ROOT_PASS,
+            database: 'gligar',
+            connectionLimit: 5
+        });
+    }
+    return pool;
+}
+
 export async function main(){ 
-    const pool = mariadb.createPool({
-        host: '127.0.0.1',
-        port: 3306,
-        user: 'root',
-        password: process.env.MARIADB_ROOT_PASS,
-        database: 'gligar',
-        connectionLimit: 5
-    })
+    pool = getPool();
 
     let conn;
     try {
@@ -46,4 +55,5 @@ export async function main(){
         pool.end();
     }
 }
+export { getPool as pool };
 main()
