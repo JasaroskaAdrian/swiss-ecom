@@ -56,7 +56,7 @@
   "scripts": {
     "test": "jest",
     "dev": "vite",
-    "build": "mkdir dist && tsc -b && vite build",
+    "build": "tsc -b && vite build",
     "lint": "eslint .",
     "preview": "vite preview",
     "serve": "node src/server/server.js",
