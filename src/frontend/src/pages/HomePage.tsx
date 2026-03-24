@@ -1,4 +1,4 @@
-import Cookies from '../components/Cookies';
+//import Cookies from '../components/Cookies';
 import Hero from '../components/Hero';
 import Footer from '../components/Footer';
 import ProductCard from '../components/ProductCard';
