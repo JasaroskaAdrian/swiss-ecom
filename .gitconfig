@@ -1,0 +1,9 @@
+[user]
+    email = adrianjasaroska@gmail.com
+    name = Adrian Jasaroska
+[alias]
+    co = checkout
+    br = branch
+    ci = commit
+    st = status
+    lg = log --oneline --graph --decorate --all
