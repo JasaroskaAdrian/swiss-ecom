@@ -4,7 +4,7 @@ services:
     image: mariadb:12.3.1-ubi10-rc
     restart: unless-stopped
     environment:
-      - MYSQL_USER=admin
+      - MYSQL_USER=${MARIADB_ROOT_USER}
       - MYSQL_ROOT_PASSWORD=${MARIADB_ROOT_PASS}
       - MYSQL_PASSWORD=${MARIADB_PASS}
       - MYSQL_DATABASE=gligar
@@ -42,9 +42,9 @@ services:
       - DB_TYPE=mariadb
       - DB_HOST=db
       - DB_PORT=3306
-      - DB_USER=admin                       # same as db: Mariadb User
+      - DB_USER=${MARIADB_ROOT_USER}                      # same as db: Mariadb User
       - DB_PASS=${MARIADB_ROOT_PASS}        # <- use a value, not DB_PASS_FILE
-      - DB_NAME=webshop  
+      - DB_NAME=gligar  
     depends_on:
       db:
         condition: service_healthy          # same as db: mariadb
