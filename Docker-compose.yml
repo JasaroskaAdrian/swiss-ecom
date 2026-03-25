@@ -1,53 +1,62 @@
 services:
   db:
-    image: postgres:16
+    container_name: database
+    image: mariadb:12.3.1-ubi10-rc
     restart: unless-stopped
     environment:
-      - POSTGRES_USER=admin
-      - POSTGRES_PASSWORD=${POSTGRES_PASS}
-      - POSTGRES_DB=shop
+      - MYSQL_USER=${MARIADB_ROOT_USER}
+      - MYSQL_ROOT_PASSWORD=${MARIADB_ROOT_PASS}
+      - MYSQL_PASSWORD=${MARIADB_PASS}
+      - MYSQL_DATABASE=gligar
     ports:
-      - "15432:5432"
+      - "3306:3306"
     volumes:
-      - dbDataSave:/var/lib/postgresql/data
+      - dbDataSave:/var/lib/mysql
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U admin -d shop || exit 1"]
-      interval: 5s
-      timeout: 3s
-      retries: 20
+      test: ["CMD", "healthcheck.sh", "--connect", "--innodb_initialized"]
     networks:
       - backend
-  adminer:
-    image: adminer:latest
+  phpmyadmin:
+    container_name: phpmyadmin
+    image: phpmyadmin/phpmyadmin
     restart: unless-stopped
+    environment:
+      - PMA_HOST=db
+      - PMA_PORT=3306
+      - MYSQL_ROOT_PASSWORD=${MARIADB_ROOT_PASS}
     ports:
-      - "8080:8080"
-    networks:
-      - backend
+      - "9200:80"                           # open http://localhost:9200
+    volumes:
+      - phpmyadmin_data:/var/lib/phpmyadmin
     depends_on:
-      - db
+      db:
+        condition: service_healthy
+    networks: [backend]
   wiki:
-    image: requarks/wiki:canary-2.5.0-dev.409
+    container_name: wiki-ecom
+    image: requarks/wiki:canary-2.5.0-dev.451
     restart: unless-stopped
     ports:
       - "8040:8040"
     environment: 
-      - DB_TYPE=postgres
-      - DB_HOST=db          # host = service name, NOT "admin"
-      - DB_PORT=5432
-      - DB_USER=admin       # same as db: POSTGRES_USER
-      - DB_PASS=${POSTGRES_PASS}   # <- use a value, not DB_PASS_FILE
-      - DB_NAME=shop  
+      - DB_TYPE=mariadb
+      - DB_HOST=db
+      - DB_PORT=3306
+      - DB_USER=${MARIADB_ROOT_USER}                      # same as db: Mariadb User
+      - DB_PASS=${MARIADB_ROOT_PASS}        # <- use a value, not DB_PASS_FILE
+      - DB_NAME=gligar  
     depends_on:
       db:
-        condition: service_healthy      # same as db: POSTGRES_DB
+        condition: service_healthy          # same as db: mariadb
   prometheus:
+    container_name: prometheus
     image: prom/prometheus
     volumes:
       - ./prometheus.yaml:/etc/prometheus/prometheus.yaml
     command:
       - '--config.file=/etc/prometheus/prometheus.yaml'
   grafana:
+    container_name: grafana
     image: grafana/grafana
     ports:
       - "3010:3000"
@@ -59,15 +68,15 @@ services:
       - GF_SECURITY_ADMIN_PASSWORD=supersecret123
   rabbitmq:
     image: rabbitmq:3-management
-    container_name: my_rabbitmq
+    container_name: rabbitmq_message_broker
     ports:
-      - "5672:5672"                        # RabbitMQ server
-      - "15672:15672"                      # RabbitMQ management console
+      - "5672:5672"                         # RabbitMQ server
+      - "15672:15672"                       # RabbitMQ management console
     volumes:
-      - ./rabbitmq/data:/var/lib/rabbitmq  # RabbitMQ data directory
+      - ./rabbitmq/data:/var/lib/rabbitmq   # RabbitMQ data directory
     environment:
-      - RABBITMQ_DEFAULT_USER=pibble       # Change this to your desired username
-      - RABBITMQ_DEFAULT_PASS=${RMQ_PASS} # Change this to your desired password
+      - RABBITMQ_DEFAULT_USER=pibble        # Change this to your desired username
+      - RABBITMQ_DEFAULT_PASS=${RMQ_PASS}   # Change this to your desired password
   traefik:
     image: traefik:v3.5
     container_name: traefik_reverseProxy
@@ -88,3 +97,4 @@ networks:
     external: true
 volumes:
   dbDataSave:
+  phpmyadmin_data:
