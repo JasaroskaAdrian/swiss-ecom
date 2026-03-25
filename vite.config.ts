@@ -7,12 +7,8 @@ export default defineConfig({
   root: "src/frontend",
 
   plugins: [
+    react(),
     tailwindcss(),
-    react({
-      babel: {
-        plugins: [["babel-plugin-react-compiler"]],
-      },
-    }),
   ],
   resolve: {
     alias: {
