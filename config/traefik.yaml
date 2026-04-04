@@ -13,4 +13,6 @@ entryPoints:
   websecure:
     address: ":443"
 providers:
-  docker: {}
+  docker:
+    exposedByDefault: false
+    network: frontend

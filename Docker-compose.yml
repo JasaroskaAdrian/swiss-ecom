@@ -16,28 +16,24 @@ services:
       test: ["CMD", "healthcheck.sh", "--connect", "--innodb_initialized"]
     networks:
       - backend
-  phpmyadmin:
-    container_name: phpmyadmin
-    image: phpmyadmin/phpmyadmin
+  cloudbeaver:
+    image: dbeaver/cloudbeaver:latest
+    container_name: cloudbeaver
     restart: unless-stopped
-    environment:
-      - PMA_HOST=db
-      - PMA_PORT=3306
-      - MYSQL_ROOT_PASSWORD=${MARIADB_ROOT_PASS}
-    ports:
-      - "9200:80"                           # open http://localhost:9200
-    volumes:
-      - phpmyadmin_data:/var/lib/phpmyadmin
-    depends_on:
-      db:
-        condition: service_healthy
-    networks: [backend]
+    networks:
+      - backend
+      - frontend
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.cloudbeaver.rule=Host(`cloudbeaver.local`)"
+      - "traefik.http.routers.cloudbeaver.entrypoints=web"
+      - "traefik.http.services.cloudbeaver.loadbalancer.server.port=8978"
   wiki:
     container_name: wiki-ecom
     image: requarks/wiki:canary-2.5.0-dev.451
     restart: unless-stopped
     ports:
-      - "8040:8040"
+      - "8040:3000"                         # wiki.js default internal port is 3000
     environment: 
       - DB_TYPE=mariadb
       - DB_HOST=db
@@ -48,6 +44,14 @@ services:
     depends_on:
       db:
         condition: service_healthy          # same as db: mariadb
+    networks:
+      - frontend
+      - backend
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.wiki.rule=Host(`wiki.local`)"
+      - "traefik.http.routers.wiki.entrypoints=web"
+      - "traefik.http.services.wiki.loadbalancer.server.port=3000"
   prometheus:
     container_name: prometheus
     image: prom/prometheus
@@ -55,6 +59,13 @@ services:
       - ./prometheus.yaml:/etc/prometheus/prometheus.yaml
     command:
       - '--config.file=/etc/prometheus/prometheus.yaml'
+    networks:
+      - frontend
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.prometheus.rule=Host(`prometheus.local`)"
+      - "traefik.http.routers.prometheus.entrypoints=web"
+      - "traefik.http.services.prometheus.loadbalancer.server.port=9090"
   grafana:
     container_name: grafana
     image: grafana/grafana
@@ -66,6 +77,13 @@ services:
     environment:
       - GF_SECURITY_ADMIN_USER=admin
       - GF_SECURITY_ADMIN_PASSWORD=supersecret123
+    networks:
+      - frontend
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.grafana.rule=Host(`grafana.local`)"
+      - "traefik.http.routers.grafana.entrypoints=web"
+      - "traefik.http.services.grafana.loadbalancer.server.port=3000"
   rabbitmq:
     image: rabbitmq:3-management
     container_name: rabbitmq_message_broker
@@ -77,8 +95,15 @@ services:
     environment:
       - RABBITMQ_DEFAULT_USER=pibble        # Change this to your desired username
       - RABBITMQ_DEFAULT_PASS=${RMQ_PASS}   # Change this to your desired password
+    networks:
+      - frontend
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.rabbitmq.rule=Host(`rabbitmq.local`)"
+      - "traefik.http.routers.rabbitmq.entrypoints=web"
+      - "traefik.http.services.rabbitmq.loadbalancer.server.port=15672"
   traefik:
-    image: traefik:v3.5
+    image: traefik:v3.6
     container_name: traefik_reverseProxy
     ports:
       - "81:80"
