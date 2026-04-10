@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 const Cookies = () => {
   return (
     <div className="fixed bottom-4 left-4 z-50 w-full max-w-sm rounded-2xl border border-border bg-card p-6 shadow-lg">
@@ -6,9 +8,9 @@ const Cookies = () => {
       </h5>
       <p className="mt-2 text-sm text-muted-foreground">
         Wir verwenden Cookies, um unsere Website und Services zu verbessern.{" "}
-        <a href="/privacy" className="font-medium text-foreground underline underline-offset-2 hover:text-muted-foreground cursor-pointer">
+        <Link to="/privacy" className="font-medium text-foreground underline underline-offset-2 hover:text-muted-foreground cursor-pointer">
           Datenschutzerklärung
-        </a>
+        </Link>
       </p>
       <div className="mt-4 flex items-center gap-3">
         <button

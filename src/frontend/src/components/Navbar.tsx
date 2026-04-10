@@ -43,15 +43,15 @@ const Navbar = () => {
             >
               Login
             </Link>
-            <a
-              href="/cart"
+            <Link
+              to="/cart"
               className="relative rounded-lg bg-foreground px-4 py-2 text-sm font-semibold text-background hover:opacity-90"
             >
               Warenkorb
               <span className="absolute -right-2 -top-2 inline-flex h-5 min-w-5 items-center justify-center rounded-full bg-foreground px-1 text-xs font-bold text-background ring-2 ring-background">
                 3
               </span>
-            </a>
+            </Link>
           </nav>
         </div>
 

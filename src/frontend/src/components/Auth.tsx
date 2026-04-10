@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom"
+
 const Auth = () => {
   return (
     <div className="min-h-screen bg-background text-foreground flex items-center justify-center px-4">
@@ -36,7 +38,7 @@ const Auth = () => {
 
           <p className="mt-4 text-sm text-muted-foreground">
             Noch kein Konto?{" "}
-            <a href="/register" className="font-semibold text-foreground underline underline-offset-4 hover:text-muted-foreground">Registrieren</a>
+            <Link to="/register" className="font-semibold text-foreground underline underline-offset-4 hover:text-muted-foreground">Registrieren</Link>
           </p>
         </div>
 

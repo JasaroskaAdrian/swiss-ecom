@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 const Hero = () => {
   return (
     <>
@@ -11,12 +13,12 @@ const Hero = () => {
               Faire Preise. Verlässliche Lieferung. Kein Schnickschnack.
             </p>
           </div>
-          <a
-            href="#products"
+          <Link
+            to="#products"
             className="shrink-0 rounded-lg bg-foreground px-6 py-3 font-semibold text-background hover:opacity-90"
           >
             Jetzt shoppen
-          </a>
+          </Link>
         </div>
       </section>
     </>
